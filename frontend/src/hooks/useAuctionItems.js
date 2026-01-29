@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback, useRef } from "react";
 import { fetchItems } from "../api";
 import { io } from "socket.io-client";
 
-const SOCKET_URL = "http://localhost:4000";
+
 
 export function useAuctionItems() {
     const [items, setItems] = useState([]);
@@ -26,7 +26,7 @@ export function useAuctionItems() {
         loadItems();
 
         // Setup Socket.io
-        const socket = io(SOCKET_URL);
+        const socket = io(process.env.REACT_APP_BACKEND_URL);
         socketRef.current = socket;
 
         socket.on("INITIAL_DATA", (data) => {
